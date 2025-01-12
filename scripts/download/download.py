@@ -34,6 +34,9 @@ benchmarks_dict = {
         'hannover',
         # 'imagenet200_cae', 'imagenet200_edsr', 'imagenet200_stylized'
     ],
+    'fractals': [
+        'fractals_and_fvis'
+    ],
 }
 
 dir_dict = {
@@ -163,6 +166,10 @@ if __name__ == '__main__':
     elif args.datasets[0] == 'cifar-10_datasets':
         args.datasets = [
             'cifar-10'
+        ]
+    elif args.datasets[0] == 'fractals':
+        args.datasets = [
+            'fractals'
         ]
     elif args.datasets[0] == 'all':
         args.datasets = list(benchmarks_dict.keys())
