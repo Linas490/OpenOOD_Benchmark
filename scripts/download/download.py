@@ -14,8 +14,7 @@ benchmarks_dict = {
         'places365', 'cinic10'
     ],
     'cifar-10': [
-        'cifar10', 'cifar100', 'tin', 'mnist', 'svhn', 'texture', 'places365',
-        'tin597'
+        'cifar10', 'cifar100', 'tin', 'mnist', 'svhn', 'texture', 'places365'
     ],
     'cifar-100':
     ['cifar100', 'cifar10', 'tin', 'svhn', 'texture', 'places365', 'tin597'],
@@ -161,6 +160,10 @@ if __name__ == '__main__':
         args.datasets = [
             'cifar-10', 'cifar-100', 'imagenet-200', 'imagenet-1k'
         ]
+    elif args.datasets[0] == 'cifar-10_datasets':
+        args.datasets = [
+            'cifar-10'
+        ]
     elif args.datasets[0] == 'all':
         args.datasets = list(benchmarks_dict.keys())
 
@@ -172,6 +175,10 @@ if __name__ == '__main__':
         args.checkpoints = [
             'cifar10_res18_v1.5', 'cifar100_res18_v1.5',
             'imagenet200_res18_v1.5', 'imagenet_res50_v1.5'
+        ]
+    elif args.checkpoints[0] == 'cifar-10':
+        args.checkpoints = [
+            'cifar10_res18_v1.5', 'cifar10_res18'
         ]
     elif args.checkpoints[0] == 'all':
         args.checkpoints = [
