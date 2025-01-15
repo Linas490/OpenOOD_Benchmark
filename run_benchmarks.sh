@@ -17,7 +17,8 @@ do
     --num_workers 2 \
     --network.checkpoint './results/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
     --mark $i \
-    --merge_option merge; then
+    --merge_option merge
+  then
     echo "Error during MSP evaluation at iteration $i"
     exit 1
   fi
@@ -33,14 +34,15 @@ do
     configs/postprocessors/mds.yml \
     --num_workers 2 \
     --network.checkpoint 'results/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
-    --mark $i; then
+    --mark $i
+  then
     echo "Error during MDS evaluation at iteration $i"
     exit 1
   fi
 
   # ODIN Evaluation
   echo "Running ODIN Evaluation"
-  python main.py \
+  if ! python main.py \
     --config configs/datasets/cifar10/cifar10.yml \
     configs/datasets/cifar10/cifar10_ood.yml \
     configs/networks/resnet18_32x32.yml \
@@ -49,14 +51,15 @@ do
     configs/postprocessors/odin.yml \
     --num_workers 2 \
     --network.checkpoint 'results/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
-    --mark $i; then
+    --mark $i
+  then
     echo "Error during ODIN evaluation at iteration $i"
     exit 1
   fi
   
   # DICE Evaluation
   echo "Running DICE Evaluation"
-  python main.py \
+  if ! python main.py \
     --config configs/datasets/cifar10/cifar10.yml \
     configs/datasets/cifar10/cifar10_ood.yml \
     configs/networks/resnet18_32x32.yml \
@@ -65,14 +68,15 @@ do
     configs/postprocessors/dice.yml \
     --num_workers 2 \
     --network.checkpoint './results/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
-    --mark $i; then
+    --mark $i
+  then
     echo "Error during DICE evaluation at iteration $i"
     exit 1
   fi
 
   # PixMix Evaluation
   echo "Running Pixmix Evaluation"
-  python main.py \
+  if ! python main.py \
     --config configs/datasets/cifar10/cifar10.yml \
     configs/datasets/cifar10/cifar10_ood.yml \
     configs/networks/resnet18_32x32.yml \
@@ -82,7 +86,8 @@ do
     configs/postprocessors/msp.yml \
     --num_workers 2 \
     --network.checkpoint 'results/cifar10_resnet18_32x32_base_e100_lr0.1_pixmix/s0/best.ckpt' \
-    --mark pixmix_$i; then
+    --mark pixmix_$i
+  then
     echo "Error during PixMix evaluation at iteration $i"
     exit 1
   fi

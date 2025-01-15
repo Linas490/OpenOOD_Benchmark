@@ -1,5 +1,3 @@
-ID-TP / ID-TP + (OOD-P - FP)
-
 echo "Getting data for CIFAR-10 benchmark"
 
 echo "downloading CIFAR-10 checkpoint"
