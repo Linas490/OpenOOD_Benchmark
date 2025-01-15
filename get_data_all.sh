@@ -1,41 +1,44 @@
-#!/bin/bash
+ID-TP / ID-TP + (OOD-P - FP)
 
-echo "Starting the download process"
+echo "Getting data for CIFAR-10 benchmark"
 
-echo "Download CIFAR-10 checkpoint"
-# Get CIFAR-10 checkpoint
+echo "downloading CIFAR-10 checkpoint"
 python ./scripts/download/download.py \
-  --contents 'checkpoints' \
-  --checkpoints 'cifar-10' \
-  --save_dir './data' './results' \
-  --dataset_mode 'benchmark'
+	--contents 'checkpoints' \
+	--datasets 'cifar-10_datasets' \
+	--checkpoints 'cifar-10' \
+	--save_dir './data' './results' \
+	--dataset_mode 'benchmark'
+echo "success!"
 
-echo "Download CIFAR-10 datasets"
-# Get CIFAR-10 benchmark datasets
+echo "downloading CIFAR-10 datasets..."
 python ./scripts/download/download.py \
-  --contents 'datasets' \
-  --datasets 'cifar-10_datasets' \
-  --save_dir './data' './results' \
-  --dataset_mode 'benchmark'
+	--contents 'datasets' \
+	--datasets 'cifar-10' \
+	--checkpoints 'cifar-10' \
+	--save_dir './data' './results' \
+	--dataset_mode 'benchmark'
+echo "success!"
 
-echo "Download Fractals dataset"
-# Get Fractals dataset for PixMix
+echo "downloading fractals dataset..."
 python ./scripts/download/download.py \
-  --contents 'datasets' \
-  --datasets 'fractals' \
-  --save_dir './data' './results' \
-  --dataset_mode 'benchmark'
+	--contents 'datasets' \
+	--datasets 'fractals' \
+	--checkpoints 'cifar-10' \
+	--save_dir './data' './results' \
+	--dataset_mode 'benchmark'
+echo "success!"
 
-echo "Train CIFAR-10 on Fractals"
-# Get Resnet_18 CIFAR-10 + Fractals checkpoint for PixMix
+echo "starting PixMix checkpoint training"
 python main.py \
-  --config configs/datasets/cifar10/cifar10.yml \
-  configs/networks/resnet18_32x32.yml \
-  configs/pipelines/train/baseline.yml \
-  configs/preprocessors/pixmix_preprocessor.yml \
-  --num_workers 8 \
-  --optimizer.num_epochs 100 \
-  --mark pixmix \
-  --seed 0
+    --config configs/datasets/cifar10/cifar10.yml \
+    configs/networks/resnet18_32x32.yml \
+    configs/pipelines/train/baseline.yml \
+    configs/preprocessors/pixmix_preprocessor.yml \
+    --num_workers 2 \
+    --optimizer.num_epochs 100 \
+    --mark pixmix \
+    --seed 0
+echo "success!"
 
-echo "Process complete"
+echo "All CIFAR-10 data loaded successfully!"
