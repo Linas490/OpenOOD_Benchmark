@@ -4,7 +4,7 @@
 # provided by OpenOOD v1.5
 python ./scripts/download/download.py \
 	--contents 'datasets' 'checkpoints' \
-	--datasets 'ood_v1.5' \
-	--checkpoints 'ood_v1.5' \
+	--datasets 'cifar-10_datasets' \
+	--checkpoints 'cifar-10' \
 	--save_dir './data' './results' \
 	--dataset_mode 'benchmark'
